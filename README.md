@@ -1,2 +1,0 @@
-# GameShooter
-Game shooter 
