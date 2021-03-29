@@ -22,14 +22,10 @@ perso_sit02 = pygame.image.load("./sprites/perso_sit02.png")
 
 ########### Ex #######
 class Personnage(pygame.sprite.Sprite):
-    	
 	spriteSheet = pygame.image.load("./sprites/persoUpDown.png").convert_alpha()
-	
 	sequences = [(0,1,False),(1,3,True)]
-	
 	def __init__(self):
 		pygame.sprite.Sprite.__init__(self)
-	
 		self.image = Personnage.spriteSheet.subsurface(pygame.Rect(0,0,99,125))
 		self.rect = pygame.Rect(0,0,99,125)
 		self.rect.bottom = HEIGHT
@@ -43,12 +39,10 @@ class Personnage(pygame.sprite.Sprite):
 			
 	def update(self,time):
 		self.deltaTime = self.deltaTime + time
-		
 		if self.deltaTime>=150:
 			self.deltaTime = 0
-			
 			n = Personnage.sequences[self.numeroSequence][0]+self.numeroImage
-			self.image = Personnage.spriteSheet.subsurface(pygame.Rect(n%10*100,n//10*125,99,125)) #(NumSprite%NbrColonne*W_Celulle, NumSprite//NbrColonne*H_Celulle, W_sprite,H_sprite)
+			self.image = Personnage.spriteSheet.subsurface(pygame.Rect(n%10*100,n//10*125,99,125)) 
 			if self.flip:
 				self.image = pygame.transform.flip(self.image,True,False)
 			
@@ -66,8 +60,9 @@ class Personnage(pygame.sprite.Sprite):
 			self.numeroSequence = n
 	
 	def down(self):
-		self.rect = self.rect.move(self.vitesse,0).clamp(rect)
-		self.flip = False
+    		#flip => indique si l'image doit être retournée
+		#self.rect = self.rect.move(self.vitesse,0).clamp(rect)
+		self.flip = False 
 		self.setSequence(1)
 
 	def goLeft(self):
@@ -100,16 +95,6 @@ def main():
                     move_x = 5
                 if event.key == pygame.K_DOWN:
                     perso.down()
-            '''       
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_RIGHT:    
-                    move_x = 0    
-                if event.key == pygame.K_DOWN:
-                    perso(perso_x,perso_y,perso_stand)  
-                    print()  
-                   
-        perso_x += move_x
-        '''
         surface.blit(background,(0,0))
         surface.blit(background,rect)
         surface.blit(perso.image,perso.rect)
