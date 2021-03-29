@@ -5,10 +5,8 @@ pygame.init()
 
 WIDTH = 1020
 HEIGHT = 600
-grid_w = 250
-grid_h = 250
-sprite_w = 250
-sprite_h = 240
+grid_w = 195
+grid_h = 195
 
 surface = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("GameShooter")
@@ -24,8 +22,8 @@ class Personnage(pygame.sprite.Sprite):
 		pygame.sprite.Sprite.__init__(self)
 		self.pos_x = pos_x 
 		self.pos_y = pos_y
-		self.image = Personnage.spriteSheet.subsurface(pygame.Rect(0,0,sprite_w,sprite_h))
-		self.rect = pygame.Rect(pos_x,pos_y,sprite_w,sprite_h)
+		self.image = Personnage.spriteSheet.subsurface(pygame.Rect(0,0,grid_w,grid_h))
+		self.rect = pygame.Rect(pos_x,pos_y,grid_w,grid_h)
 		self.rect.bottom = HEIGHT
 		self.numeroSequence = 0
 		self.numeroImage = 0
@@ -38,7 +36,7 @@ class Personnage(pygame.sprite.Sprite):
 		if self.deltaTime>=150:
 			self.deltaTime = 0
 			n = Personnage.sequences[self.numeroSequence][0]+self.numeroImage
-			self.image = Personnage.spriteSheet.subsurface(pygame.Rect(n%10*grid_w,n//10*grid_h,sprite_w,sprite_h)) 
+			self.image = Personnage.spriteSheet.subsurface(pygame.Rect(n%10*grid_w,n//10*grid_h,grid_w,grid_h)) 
 			if self.flip:
 				self.image = pygame.transform.flip(self.image,True,False)
 			
