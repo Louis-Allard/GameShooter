@@ -29,7 +29,7 @@ class Personnage(pygame.sprite.Sprite):
 		self.numeroImage = 0
 		self.flip = False
 		self.deltaTime = 0
-		self.vitesse = int(5)
+		self.vitesse = int(200)
 			
 	def update(self,time):
 		self.deltaTime = self.deltaTime + time

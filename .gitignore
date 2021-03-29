@@ -126,5 +126,5 @@ dmypy.json
 .pyre/
 
 #sprites
-sprites/originals
-sprites/xcf
+sprites/originals/
+sprites/xcf/
