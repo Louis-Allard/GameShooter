@@ -17,7 +17,7 @@ rectScreen = surface.get_rect()
 class Personnage(pygame.sprite.Sprite):
 	spriteSheet = pygame.image.load("./sprites/player.png").convert_alpha()
 	#[(stand),(down),(run),(fight),(die),(jump)]
-	sequences = [(0,1,False),(1,3,False),(4,7,True),(10,4,True),(14,8,True),(23,6,False)]
+	sequences = [(0,1,False),(1,3,False),(4,7,True),(10,4,True),(14,9,True),(23,6,False)]
 	def __init__(self,pos_x,pos_y):
 		pygame.sprite.Sprite.__init__(self)
 		self.pos_x = pos_x 
