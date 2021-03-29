@@ -54,7 +54,7 @@ class Personnage(pygame.sprite.Sprite):
 			self.numeroSequence = n
 	
 	def goRight(self):
-		self.rect = self.rect.move(-self.vitesse,0).clamp(rectScreen)
+		self.rect = self.rect.move(self.vitesse,0).clamp(rectScreen)
 		self.flip = True
 		self.setSequence(2)
 
@@ -73,15 +73,15 @@ def main():
 			if event.type == pygame.QUIT:
 				game_over = True
 			if event.type == pygame.KEYDOWN:
-    			if event.key == pygame.K_RIGHT:
+				if event.key == pygame.K_RIGHT:
 					perso.goRight()
-                if event.key == pygame.K_DOWN:
-                    perso.setSequence(1)
+				if event.key == pygame.K_DOWN:
+					perso.setSequence(1)
 		perso.update(time)			
-        surface.blit(background,(0,0))
-        surface.blit(background,rect)
-        surface.blit(perso.image,perso.rect)
-        pygame.display.update()
+		surface.blit(background,(0,0))
+		surface.blit(background,rect)
+		surface.blit(perso.image,perso.rect)
+		pygame.display.update()
 
 main()
 pygame.quit()
