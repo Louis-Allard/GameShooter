@@ -5,29 +5,23 @@ pygame.init()
 
 WIDTH = 1020
 HEIGHT = 600
-perso_standW = 75
-perso_standH = 100
-perso_stit01W = 75
-perso_sit01H = 89
-perso_sit02W = 75
-perso_sit02H = 75
+sprite_w = 303
+sprite_h = 363
 
 surface = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("GameShooter")
 background = pygame.image.load("./sprites/background.png").convert()
 rect = background.get_rect()
-perso_stand = pygame.image.load("./sprites/perso_stand.png")
-perso_sit01 = pygame.image.load("./sprites/perso_sit01.png")
-perso_sit02 = pygame.image.load("./sprites/perso_sit02.png")
+rectScreen = surface.get_rect()
 
-########### Ex #######
 class Personnage(pygame.sprite.Sprite):
-	spriteSheet = pygame.image.load("./sprites/persoUpDown.png").convert_alpha()
-	sequences = [(0,1,False),(1,3,True)]
+	spriteSheet = pygame.image.load("./sprites/player.png").convert_alpha()
+	#[(stand),(down),(run),(fight),(die),(jump)]
+	sequences = [(0,1,False),(1,3,True),(4,7,True),(10,4,True),(14,8,True),(23,6,True)]
 	def __init__(self):
 		pygame.sprite.Sprite.__init__(self)
-		self.image = Personnage.spriteSheet.subsurface(pygame.Rect(0,0,99,125))
-		self.rect = pygame.Rect(0,0,99,125)
+		self.image = Personnage.spriteSheet.subsurface(pygame.Rect(0,0,sprite_w,sprite_h))
+		self.rect = pygame.Rect(0,0,sprite_w,sprite_h)
 		self.rect.bottom = HEIGHT
 
 		self.numeroSequence = 0
@@ -42,7 +36,7 @@ class Personnage(pygame.sprite.Sprite):
 		if self.deltaTime>=150:
 			self.deltaTime = 0
 			n = Personnage.sequences[self.numeroSequence][0]+self.numeroImage
-			self.image = Personnage.spriteSheet.subsurface(pygame.Rect(n%10*100,n//10*125,99,125)) 
+			self.image = Personnage.spriteSheet.subsurface(pygame.Rect(n%10*100,n//10*125,sprite_w,sprite_h)) 
 			if self.flip:
 				self.image = pygame.transform.flip(self.image,True,False)
 			
@@ -59,49 +53,35 @@ class Personnage(pygame.sprite.Sprite):
 			self.numeroImage = 0
 			self.numeroSequence = n
 	
-	def down(self):
-    		#flip => indique si l'image doit être retournée
-		#self.rect = self.rect.move(self.vitesse,0).clamp(rect)
-		self.flip = False 
-		self.setSequence(1)
+	def goRight(self):
+		self.rect = self.rect.move(-self.vitesse,0).clamp(rectScreen)
+		self.flip = True
+		self.setSequence(2)
 
 	def goLeft(self):
-		self.rect = self.rect.move(-self.vitesse,0).clamp(rect)
+		self.rect = self.rect.move(-self.vitesse,0).clamp(rectScreen)
 		self.flip = True
-		self.setSequence(1)
-
-#########
-
-def perso_change(perso_x,perso_y,image):
-    surface.blit(background,rect)
-    #surface.blit(image,(perso_x,perso_y))
-
-def perso(perso_x,perso_y,image):
-        surface.blit(image,(perso_x,perso_y))
+		self.setSequence(2)
 
 def main():
-    clock = pygame.time.Clock()
-    game_over = False
-    perso_x = 30
-    perso_y = 500
-    move_x = 0
-    perso = Personnage()
-    while not game_over:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                game_over = True
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
-                    move_x = 5
+	clock = pygame.time.Clock()
+	time = clock.tick(60)
+	game_over = False
+	perso = Personnage()
+	while not game_over:
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				game_over = True
+			if event.type == pygame.KEYDOWN:
+    			if event.key == pygame.K_RIGHT:
+					perso.goRight()
                 if event.key == pygame.K_DOWN:
-                    perso.down()
+                    perso.setSequence(1)
+		perso.update(time)			
         surface.blit(background,(0,0))
         surface.blit(background,rect)
         surface.blit(perso.image,perso.rect)
-        #surface.blit(perso_stand, (perso_x,perso_y))
-        #perso(perso_x,perso_y,perso_stand)
         pygame.display.update()
-        clock.tick(60)
 
 main()
 pygame.quit()
