@@ -5,8 +5,10 @@ pygame.init()
 
 WIDTH = 1020
 HEIGHT = 600
-sprite_w = 303
-sprite_h = 363
+grid_w = 250
+grid_h = 250
+sprite_w = 250
+sprite_h = 240
 
 surface = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("GameShooter")
@@ -17,26 +19,24 @@ rectScreen = surface.get_rect()
 class Personnage(pygame.sprite.Sprite):
 	spriteSheet = pygame.image.load("./sprites/player.png").convert_alpha()
 	#[(stand),(down),(run),(fight),(die),(jump)]
-	sequences = [(0,1,False),(1,3,True),(4,7,True),(10,4,True),(14,8,True),(23,6,True)]
+	sequences = [(0,1,False),(1,3,False),(4,7,True),(10,4,True),(14,8,True),(23,6,False)]
 	def __init__(self):
 		pygame.sprite.Sprite.__init__(self)
 		self.image = Personnage.spriteSheet.subsurface(pygame.Rect(0,0,sprite_w,sprite_h))
 		self.rect = pygame.Rect(0,0,sprite_w,sprite_h)
 		self.rect.bottom = HEIGHT
-
 		self.numeroSequence = 0
 		self.numeroImage = 0
 		self.flip = False
-
 		self.deltaTime = 0
-		self.vitesse = int(30)
+		self.vitesse = int(5)
 			
 	def update(self,time):
 		self.deltaTime = self.deltaTime + time
 		if self.deltaTime>=150:
 			self.deltaTime = 0
 			n = Personnage.sequences[self.numeroSequence][0]+self.numeroImage
-			self.image = Personnage.spriteSheet.subsurface(pygame.Rect(n%10*100,n//10*125,sprite_w,sprite_h)) 
+			self.image = Personnage.spriteSheet.subsurface(pygame.Rect(n%10*grid_w,n//10*grid_h,sprite_w,sprite_h)) 
 			if self.flip:
 				self.image = pygame.transform.flip(self.image,True,False)
 			
@@ -52,12 +52,17 @@ class Personnage(pygame.sprite.Sprite):
 		if self.numeroSequence != n:
 			self.numeroImage = 0
 			self.numeroSequence = n
-	
+
+	def goJump(self):
+		self.flip = False
+		self.setSequence(5)
+	def goDown(self):
+		self.flip = False
+		self.setSequence(1)
 	def goRight(self):
 		self.rect = self.rect.move(self.vitesse,0).clamp(rectScreen)
-		self.flip = True
+		self.flip = False
 		self.setSequence(2)
-
 	def goLeft(self):
 		self.rect = self.rect.move(-self.vitesse,0).clamp(rectScreen)
 		self.flip = True
@@ -75,8 +80,14 @@ def main():
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_RIGHT:
 					perso.goRight()
+				if event.key == pygame.K_LEFT:
+    					perso.goLeft()	
 				if event.key == pygame.K_DOWN:
-					perso.setSequence(1)
+					perso.goDown()
+				if event.key == pygame.K_UP:
+					perso.goJump()	
+			if event.type == pygame.KEYUP:
+    				perso.setSequence(0)		
 		perso.update(time)			
 		surface.blit(background,(0,0))
 		surface.blit(background,rect)
