@@ -20,10 +20,12 @@ class Personnage(pygame.sprite.Sprite):
 	spriteSheet = pygame.image.load("./sprites/player.png").convert_alpha()
 	#[(stand),(down),(run),(fight),(die),(jump)]
 	sequences = [(0,1,False),(1,3,False),(4,7,True),(10,4,True),(14,8,True),(23,6,False)]
-	def __init__(self):
+	def __init__(self,pos_x,pos_y):
 		pygame.sprite.Sprite.__init__(self)
+		self.pos_x = pos_x 
+		self.pos_y = pos_y
 		self.image = Personnage.spriteSheet.subsurface(pygame.Rect(0,0,sprite_w,sprite_h))
-		self.rect = pygame.Rect(0,0,sprite_w,sprite_h)
+		self.rect = pygame.Rect(pos_x,pos_y,sprite_w,sprite_h)
 		self.rect.bottom = HEIGHT
 		self.numeroSequence = 0
 		self.numeroImage = 0
@@ -72,7 +74,11 @@ def main():
 	clock = pygame.time.Clock()
 	time = clock.tick(60)
 	game_over = False
-	perso = Personnage()
+	pos_x = 0
+	pos_y = 0
+	move_x = 0
+	move_y = 0
+	perso = Personnage(pos_x,pos_y)
 	while not game_over:
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -81,13 +87,15 @@ def main():
 				if event.key == pygame.K_RIGHT:
 					perso.goRight()
 				if event.key == pygame.K_LEFT:
-    					perso.goLeft()	
+					move_x = 5
+					perso.goLeft()	
 				if event.key == pygame.K_DOWN:
 					perso.goDown()
 				if event.key == pygame.K_UP:
 					perso.goJump()	
 			if event.type == pygame.KEYUP:
-    				perso.setSequence(0)		
+    				perso.setSequence(0)	
+		pos_x += move_x				
 		perso.update(time)			
 		surface.blit(background,(0,0))
 		surface.blit(background,rect)
