@@ -1,8 +1,10 @@
 import pygame
 import time
+from random import *
 
 pygame.init()
 
+WHITE = (255,255,255)
 WIDTH = 1020
 HEIGHT = 600
 grid_w = 195
@@ -13,6 +15,18 @@ pygame.display.set_caption("GameShooter")
 background = pygame.image.load("./sprites/background.png").convert()
 rect = background.get_rect()
 rectScreen = surface.get_rect()
+
+class elements(pygame.sprite.Sprite):
+	el01 = pygame.image.load("./sprites/el01.png").convert_alpha()
+	el02 = pygame.image.load("./sprites/el02.png").convert_alpha()
+	el03 = pygame.image.load("./sprites/el03.png").convert_alpha()
+	el04 = pygame.image.load("./sprites/el04.png").convert_alpha()
+
+	def elmnts(self,elmnts_x,elmnts_y):
+		surface.blit(self.el01,(elmnts_x + randint(10,20),elmnts_y + randint(-100,-300)))
+		surface.blit(self.el02,(elmnts_x + randint(20,100),elmnts_y + randint(-10,-600)))
+		surface.blit(self.el03,(elmnts_x + randint(50,240),elmnts_y + randint(-40,-HEIGHT)))
+		surface.blit(self.el04,(elmnts_x + randint(5,250),elmnts_y + randint(-10,-20)))
 
 class Personnage(pygame.sprite.Sprite):
 	spriteSheet = pygame.image.load("./sprites/player.png").convert_alpha()
@@ -111,6 +125,7 @@ def main():
 		surface.blit(background,(0,0))
 		surface.blit(background,rect)
 		surface.blit(perso.image,perso.rect)
+		elements.elmnts(0,0)
 		pygame.display.update()
 main()
 pygame.quit()
