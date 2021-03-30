@@ -54,22 +54,25 @@ class Personnage(pygame.sprite.Sprite):
 
 	def goJump(self,j):
 		if j == 1:
-			up = -self.jump
+			upDown = -self.jump
 		elif j== 0:
-			up = self.jump	
+			upDown = self.jump	
 		else:
-			up = 0
+			upDown = 0
 			print("WARNING j is invalid")		
-		self.rect = self.rect.move(0,up).clamp(rectScreen)   
+		self.rect = self.rect.move(0,upDown).clamp(rectScreen)   
 		self.flip = False			
 		self.setSequence(0)
 	def goDown(self):
 		self.flip = False
 		self.setSequence(1)
 	def goRight(self):
-		self.rect = self.rect.move(self.vitesse,0).clamp(rectScreen)
-		self.flip = False
-		self.setSequence(2)
+		for i in range(1,WIDTH):
+			pygame.time.wait(10)		
+			print(i)
+			self.rect = self.rect.move(self.vitesse,0).clamp(rectScreen)
+			self.flip = False
+			self.setSequence(2)
 	def goLeft(self):
 		self.rect = self.rect.move(-self.vitesse,0).clamp(rectScreen)
 		self.flip = True
@@ -93,10 +96,10 @@ def main():
 					perso.goLeft()	
 				if event.key == pygame.K_DOWN:
 					perso.goDown()
-				if event.key == pygame.K_UP:
+				if event.key == pygame.K_SPACE:
 					perso.goJump(1)	
 			if event.type == pygame.KEYUP:	
-				if event.key == pygame.K_UP:
+				if event.key == pygame.K_SPACE:
 					perso.goJump(0)			
 				perso.setSequence(0)		
 
