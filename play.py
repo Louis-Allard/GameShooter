@@ -7,8 +7,6 @@ WIDTH = 1020
 HEIGHT = 600
 grid_w = 195
 grid_h = 195
-pos_x = 0
-pos_y = 0
 
 surface = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("GameShooter")
@@ -23,13 +21,14 @@ class Personnage(pygame.sprite.Sprite):
 	def __init__(self):
 		pygame.sprite.Sprite.__init__(self)
 		self.image = Personnage.spriteSheet.subsurface(pygame.Rect(0,0,grid_w,grid_h))
-		self.rect = pygame.Rect(pos_x,pos_y,grid_w,grid_h)
+		self.rect = pygame.Rect(0,0,grid_w,grid_h)
 		self.rect.bottom = HEIGHT
 		self.numeroSequence = 0
 		self.numeroImage = 0
 		self.flip = False
 		self.deltaTime = 0
 		self.vitesse = 10
+		self.jump = 50
 			
 	def update(self,time):
 		self.deltaTime = self.deltaTime + time
@@ -53,9 +52,17 @@ class Personnage(pygame.sprite.Sprite):
 			self.numeroImage = 0
 			self.numeroSequence = n
 
-	def goJump(self):
-		self.flip = False
-		self.setSequence(5)
+	def goJump(self,j):
+		if j == 1:
+			up = -self.jump
+		elif j== 0:
+			up = self.jump	
+		else:
+			up = 0
+			print("WARNING j is invalid")		
+		self.rect = self.rect.move(0,up).clamp(rectScreen)   
+		self.flip = False			
+		self.setSequence(0)
 	def goDown(self):
 		self.flip = False
 		self.setSequence(1)
@@ -70,8 +77,10 @@ class Personnage(pygame.sprite.Sprite):
 
 def main():
 	clock = pygame.time.Clock()
-	time = clock.tick(60)
+	time = clock.tick(500)
 	game_over = False
+	pos_x = 0
+	pos_y = 0	
 	perso = Personnage()
 	while not game_over:
 		for event in pygame.event.get():
@@ -85,9 +94,12 @@ def main():
 				if event.key == pygame.K_DOWN:
 					perso.goDown()
 				if event.key == pygame.K_UP:
-					perso.goJump()	
-			if event.type == pygame.KEYUP:
-    				perso.setSequence(0)					
+					perso.goJump(1)	
+			if event.type == pygame.KEYUP:	
+				if event.key == pygame.K_UP:
+					perso.goJump(0)			
+				perso.setSequence(0)		
+
 		perso.update(time)			
 		surface.blit(background,(0,0))
 		surface.blit(background,rect)
