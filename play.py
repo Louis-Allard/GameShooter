@@ -66,17 +66,21 @@ class Personnage(pygame.sprite.Sprite):
 	def goDown(self):
 		self.flip = False
 		self.setSequence(1)
-	def goRight(self):
-		for i in range(1,WIDTH):
-			pygame.time.wait(10)		
-			print(i)
-			self.rect = self.rect.move(self.vitesse,0).clamp(rectScreen)
-			self.flip = False
-			self.setSequence(2)
-	def goLeft(self):
-		self.rect = self.rect.move(-self.vitesse,0).clamp(rectScreen)
-		self.flip = True
-		self.setSequence(2)
+	def walk(self,k):
+		if k == 1:
+			v = self.vitesse
+			f = False
+		elif k == 2:
+			v = -self.vitesse
+			f = True
+		else:
+			v = 0
+			set.flip = False
+			print("WARNING k is invalid")	
+		for i in range(0,5):
+			self.setSequence(2)	
+			self.rect = self.rect.move(v,0).clamp(rectScreen)
+			self.flip = f
 
 def main():
 	clock = pygame.time.Clock()
@@ -91,9 +95,9 @@ def main():
 				game_over = True
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_RIGHT:
-					perso.goRight()
+					perso.walk(1)
 				if event.key == pygame.K_LEFT:
-					perso.goLeft()	
+					perso.walk(2)	
 				if event.key == pygame.K_DOWN:
 					perso.goDown()
 				if event.key == pygame.K_SPACE:
