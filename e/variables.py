@@ -13,7 +13,6 @@ el03_w = 12
 el03_h = 8
 el04_w = 10
 el04_h = 11
-
 surface = pygame.display.set_mode((WIDTH,HEIGHT))
 background = pygame.image.load("./sprites/background.png").convert()
 rect = background.get_rect()
