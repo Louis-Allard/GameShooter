@@ -142,6 +142,7 @@ def main():
 		elmnts_x -= elemts_vitesse
 		if elmnts_x < 20:
 			elmnts_x = WIDTH
+			elmnts_y = randint(-0,HEIGHT)
 
 		pygame.display.update()
 main()
