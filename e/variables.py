@@ -13,6 +13,11 @@ el03_w = 12
 el03_h = 8
 el04_w = 10
 el04_h = 11
+bullet_x = grid_w - 50
+bullet_y = HEIGHT - 110
+elemts_vitesse = 10
+bullet_vitesse = 30
+
 surface = pygame.display.set_mode((WIDTH,HEIGHT))
 background = pygame.image.load("./sprites/background.png").convert()
 rect = background.get_rect()
