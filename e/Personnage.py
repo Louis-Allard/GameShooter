@@ -3,6 +3,9 @@ from e.variables import *
 
 pygame.display.set_caption("GameShooter")
 
+game_over = False
+
+
 class Personnage(pygame.sprite.Sprite):
 	spriteSheet = pygame.image.load("./sprites/player.png").convert_alpha()
 	bullet = pygame.image.load("./sprites/bullet.png").convert_alpha()
@@ -19,7 +22,12 @@ class Personnage(pygame.sprite.Sprite):
 		self.deltaTime = 0
 		self.vitesse = 6
 		self.jump = 50	
-			
+
+	def bullet_move(self,bullet_x):
+		while self.bullet_x < WIDTH:	
+			print("bullet_x::" + str(self.bullet_x))
+			bullet_x += bullet_vitesse					
+
 	def update(self,time):
 		self.deltaTime = self.deltaTime + time
 		if self.deltaTime>=150:
@@ -83,9 +91,9 @@ class Personnage(pygame.sprite.Sprite):
 			else:
 				bullet_x = pos_x + grid_w - 50	
 			'''
-			bullet_x += bullet_vitesse			
+			Personnage.bullet_move(self.bullet_x)
 		elif enable == 0:
 			self.bullet.set_alpha(0)	
 		else:
 			print("WARNING BULLET ALPHA")
-		surface.blit(self.bullet,(bullet_x,bullet_y))						
+		surface.blit(self.bullet,(bullet_x,bullet_y))		
