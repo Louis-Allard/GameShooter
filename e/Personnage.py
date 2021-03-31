@@ -77,10 +77,13 @@ class Personnage(pygame.sprite.Sprite):
 		bullet_x = pos_x + grid_w - 50
 		if enable == 1:
 			self.bullet.set_alpha(200)
+			'''
 			if bullet_x < WIDTH:
 				bullet_x += bullet_vitesse
 			else:
-				bullet_x = pos_x + grid_w - 50			
+				bullet_x = pos_x + grid_w - 50	
+			'''
+			bullet_x += bullet_vitesse			
 		elif enable == 0:
 			self.bullet.set_alpha(0)	
 		else:
