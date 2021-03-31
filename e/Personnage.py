@@ -17,7 +17,7 @@ class Personnage(pygame.sprite.Sprite):
 		self.flip = False
 		self.deltaTime = 0
 		self.vitesse = 6
-		self.jump = 50
+		self.jump = 50	
 			
 	def update(self,time):
 		self.deltaTime = self.deltaTime + time
@@ -53,6 +53,7 @@ class Personnage(pygame.sprite.Sprite):
 		self.flip = False			
 		self.setSequence(0)
 	def goDown(self):
+		print("goDown")
 		self.flip = False
 		self.setSequence(1)
 	def walk(self,k):

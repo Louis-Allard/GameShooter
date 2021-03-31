@@ -17,6 +17,8 @@ bullet_x = grid_w - 50
 bullet_y = HEIGHT - 110
 elemts_vitesse = 10
 bullet_vitesse = 30
+pos_x = 0
+pos_y = 0
 
 surface = pygame.display.set_mode((WIDTH,HEIGHT))
 background = pygame.image.load("./sprites/background.png").convert()

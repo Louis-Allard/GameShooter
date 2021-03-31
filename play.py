@@ -15,8 +15,6 @@ def main():
 	clock = pygame.time.Clock()
 	time = clock.tick(500)
 	game_over = False
-	pos_x = 0
-	pos_y = 0	
 	elmnts_x = WIDTH
 	elmnts_y = randint(-20,610)
 	espace_elemnts = el04_h * randint(2,10)
@@ -40,6 +38,10 @@ def main():
 				if event.key == pygame.K_SPACE:
 					bullet_x = grid_w - 50
 					enable = 1
+					if bullet_x < WIDTH:
+						bullet_x += bullet_vitesse
+					else:
+						bullet_x = grid_w - 50
 			if event.type == pygame.KEYUP:	
 				if event.key == pygame.K_UP:
 					perso.goJump(0)			
@@ -57,12 +59,6 @@ def main():
 		if elmnts_x < 20:
 			elmnts_x = WIDTH
 			elmnts_y = randint(-0,HEIGHT)
-
-		if bullet_x < WIDTH:
-			bullet_x += bullet_vitesse
-		else:
-			bullet_x = grid_w - 50
-
 
 		pygame.display.update()
 main()

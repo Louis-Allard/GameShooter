@@ -12,4 +12,3 @@ class Shoot(pygame.sprite.Sprite):
         else:
             print("WARNING BULLET ALPHA")    
         surface.blit(self.bullet,(bullet_x,bullet_y))
-        print(bullet_x)
