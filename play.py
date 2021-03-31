@@ -19,8 +19,7 @@ def main():
 	elmnts_y = randint(-20,610)
 	espace_elemnts = el04_h * randint(2,10)
 	enable = 0
-	bullet_x = 0
-	perso.update(time)			
+	bullet_x = 0	
 
 	while not game_over: 		
 		for event in pygame.event.get():
@@ -49,6 +48,7 @@ def main():
 					enable = 0
 				perso.setSequence(0)		
 		
+		perso.update(time)		
 		surface.blit(background,(0,0))
 		surface.blit(background,rect)
 		elmts.elmnts(elmnts_x,elmnts_y,espace_elemnts)
