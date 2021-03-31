@@ -5,6 +5,7 @@ pygame.display.set_caption("GameShooter")
 
 class Personnage(pygame.sprite.Sprite):
 	spriteSheet = pygame.image.load("./sprites/player.png").convert_alpha()
+	bullet = pygame.image.load("./sprites/bullet.png").convert_alpha()
 	#[(stand),(down),(run),(fight),(die),(jump)]
 	sequences = [(0,1,False),(1,3,False),(4,7,True),(10,4,True),(14,9,True),(23,6,False)]
 	def __init__(self):
@@ -71,4 +72,17 @@ class Personnage(pygame.sprite.Sprite):
 			self.setSequence(2)	
 			self.rect = self.rect.move(v,0).clamp(rectScreen)
 			self.flip = f
-			pos_x = self.rect[0]
+	def goBullet(self,bullet_x,bullet_y,pos_x,enable):
+		pos_x = self.rect[0]
+		bullet_x = pos_x + grid_w - 50
+		if enable == 1:
+			self.bullet.set_alpha(200)
+			if bullet_x < WIDTH:
+				bullet_x += bullet_vitesse
+			else:
+				bullet_x = pos_x + grid_w - 50			
+		elif enable == 0:
+			self.bullet.set_alpha(0)	
+		else:
+			print("WARNING BULLET ALPHA")
+		surface.blit(self.bullet,(bullet_x,bullet_y))						
