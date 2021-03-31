@@ -40,7 +40,8 @@ def main():
 					if bullet_x < WIDTH:
 						bullet_x += bullet_vitesse
 					else:
-						bullet_x = grid_w - 50
+						bullet_x = pos_x + grid_w - 50
+					print("pos_x: " + str(pos_x))
 			if event.type == pygame.KEYUP:	
 				if event.key == pygame.K_UP:
 					perso.goJump(0)			
@@ -53,7 +54,7 @@ def main():
 		surface.blit(background,rect)
 		elmts.elmnts(elmnts_x,elmnts_y,espace_elemnts)
 		surface.blit(perso.image,perso.rect)     			
-		shoot.goBullet(bullet_x,bullet_y,enable)
+		shoot.goBullet(bullet_x,bullet_y,pos_x,enable)
 
 		elmnts_x -= elemts_vitesse
 		if elmnts_x < 20:
