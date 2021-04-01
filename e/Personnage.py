@@ -5,7 +5,6 @@ pygame.display.set_caption("GameShooter")
 
 game_over = False
 
-
 class Personnage(pygame.sprite.Sprite):
 	spriteSheet = pygame.image.load("./sprites/player.png").convert_alpha()
 	bullet = pygame.image.load("./sprites/bullet.png").convert_alpha()
@@ -22,11 +21,8 @@ class Personnage(pygame.sprite.Sprite):
 		self.deltaTime = 0
 		self.vitesse = 6
 		self.jump = 50	
-
-	def bullet_move(self,bullet_x):
-		while self.bullet_x < WIDTH:	
-			print("bullet_x::" + str(self.bullet_x))
-			bullet_x += bullet_vitesse					
+		self.bullet_x = 0
+		self.bullet_y = 0	
 
 	def update(self,time):
 		self.deltaTime = self.deltaTime + time
@@ -61,10 +57,12 @@ class Personnage(pygame.sprite.Sprite):
 		self.rect = self.rect.move(0,upDown).clamp(rectScreen)   
 		self.flip = False			
 		self.setSequence(0)
+
 	def goDown(self):
 		print("goDown")
 		self.flip = False
 		self.setSequence(1)
+
 	def walk(self,k):
 		if k == 1:
 			v = self.vitesse
@@ -80,20 +78,19 @@ class Personnage(pygame.sprite.Sprite):
 			self.setSequence(2)	
 			self.rect = self.rect.move(v,0).clamp(rectScreen)
 			self.flip = f
+	'''
+	#inactif
 	def goBullet(self,bullet_x,bullet_y,pos_x,enable):
 		pos_x = self.rect[0]
 		bullet_x = pos_x + grid_w - 50
 		if enable == 1:
 			self.bullet.set_alpha(200)
-			'''
-			if bullet_x < WIDTH:
-				bullet_x += bullet_vitesse
-			else:
-				bullet_x = pos_x + grid_w - 50	
-			'''
-			Personnage.bullet_move(self.bullet_x)
+			while bullet_x < WIDTH:	
+				print("bullet_x::" + str(bullet_x))
+				bullet_x += bullet_vitesse	
+				surface.blit(self.bullet,(bullet_x,bullet_y))		
 		elif enable == 0:
 			self.bullet.set_alpha(0)	
 		else:
 			print("WARNING BULLET ALPHA")
-		surface.blit(self.bullet,(bullet_x,bullet_y))		
+	'''		

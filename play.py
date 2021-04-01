@@ -33,7 +33,8 @@ def main():
 				if event.key == pygame.K_UP:
 					perso.goJump(1)	
 				if event.key == pygame.K_SPACE:
-					perso.goBullet(bullet_x,bullet_y,pos_x,1)
+					print("perso.goBullet(bullet_x,bullet_y,pos_x,1)")
+					#perso.goBullet(bullet_x,bullet_y,pos_x,1)
 			if event.type == pygame.KEYUP:	
 				if event.key == pygame.K_UP:
 					perso.goJump(0)			
@@ -42,17 +43,19 @@ def main():
 				perso.setSequence(0)		
 		
 		perso.update(time)		
-		'''
 		surface.blit(background,(0,0))
 		surface.blit(background,rect)
 		elmts.elmnts(elmnts_x,elmnts_y,espace_elemnts)
-		surface.blit(perso.image,perso.rect)     			
+		surface.blit(perso.image,perso.rect)    
+		#surface.blit(perso.bullet,(perso.bullet_x,perso.bullet_y))		
+
+		#bullet_x += bullet_vitesse
+
 		elmnts_x -= elemts_vitesse
 		if elmnts_x < 20:
 			elmnts_x = WIDTH
 			elmnts_y = randint(-0,HEIGHT)
-		'''
-		bullet_x += bullet_vitesse
+	
 		pygame.display.update()
 main()
 pygame.quit()
