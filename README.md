@@ -9,5 +9,10 @@ Run and kill with this game shooter
 ***
 
 
-Sprites explications: 
+Sprites documentation: 
 https://sciences-du-numerique.fr/tuto-pygame/sprites.html
+
+
+***
+
+contact me on la.devweb@yahoo.com

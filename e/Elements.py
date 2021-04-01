@@ -1,5 +1,14 @@
 import pygame
 from e.variables import *
+'''
+_____   __   _       _  
+|  _  \ |  \ | |     | | 
+| |_| | |   \| |     | | 
+|  ___/ | |\   |  _  | | 
+| |     | | \  | | |_| | 
+|_|     |_|  \_| \_____/ 
+
+'''
 
 class Elements(pygame.sprite.Sprite):
     el01 = pygame.image.load("./sprites/el01.png").convert_alpha()
