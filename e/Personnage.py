@@ -21,8 +21,6 @@ class Personnage(pygame.sprite.Sprite):
 		self.deltaTime = 0
 		self.vitesse = 6
 		self.jump = 50	
-		pos_x = self.rect[0]
-		pos_y = self.rect[1]
 	
 	def update(self,time):
 		self.deltaTime = self.deltaTime + time
