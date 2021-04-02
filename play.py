@@ -19,8 +19,7 @@ def main():
 	elmnts_y = randint(-20,610)
 	espace_elemnts = el04_h * randint(2,10)
 	enable = 0 
-	bullet_x = 0	
-
+	
 	while not game_over: 		
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -35,8 +34,7 @@ def main():
 				if event.key == pygame.K_UP:
 					perso.goJump(1)	
 				if event.key == pygame.K_SPACE:
-					print("perso.goBullet(bullet_x,bullet_y,pos_x,1)")
-					#perso.goBullet(bullet_x,bullet_y,pos_x,1)
+					print("SHOT")
 			if event.type == pygame.KEYUP:	
 				if event.key == pygame.K_UP:
 					perso.goJump(0)			
@@ -49,9 +47,6 @@ def main():
 		surface.blit(background,rect)
 		elmts.elmnts(elmnts_x,elmnts_y,espace_elemnts)
 		surface.blit(perso.image,perso.rect)    
-		#surface.blit(perso.bullet,(perso.bullet_x,perso.bullet_y))		
-
-		#bullet_x += bullet_vitesse
 
 		elmnts_x -= elemts_vitesse
 		if elmnts_x < 20:
