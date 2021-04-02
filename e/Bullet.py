@@ -10,7 +10,6 @@ class Bullet(pygame.sprite.Sprite):
         self.image = pygame.Surface((30,5))
         self.image.fill((255,0,0))
         self.rect = self.image.get_rect(center = (pos_x,pos_y))
-        print("k = " + str(Personnage.walk))
 
     def update(self):
         self.rect.x  += 5
