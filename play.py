@@ -15,7 +15,7 @@ def main():
 	bullet_group = pygame.sprite.Group()
 	elmts = Elements()  	
 	clock = pygame.time.Clock()
-	time = clock.tick()
+	time = clock.tick(5)
 	elmnts_x = WIDTH
 	elmnts_y = randint(-20,610)
 	espace_elemnts = el04_h * randint(2,10)
