@@ -19,7 +19,7 @@ def main():
 	elmnts_y = randint(-20,610)
 	espace_elemnts = el04_h * randint(2,10)
 	enable = 0 
-	
+
 	while not game_over: 		
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -46,7 +46,8 @@ def main():
 		surface.blit(background,(0,0))
 		surface.blit(background,rect)
 		elmts.elmnts(elmnts_x,elmnts_y,espace_elemnts)
-		surface.blit(perso.image,perso.rect)    
+		#surface.blit(perso.image,perso.rect)    
+		perso_group.draw(surface)
 
 		elmnts_x -= elemts_vitesse
 		if elmnts_x < 20:
