@@ -6,13 +6,13 @@ pygame.display.set_caption("GameShooter")
 game_over = False
 
 class Personnage(pygame.sprite.Sprite):
-	spriteSheet = pygame.image.load("./sprites/player.png").convert_alpha()
+	player = pygame.image.load("./sprites/player.png").convert_alpha()
 	bullet = pygame.image.load("./sprites/bullet.png").convert_alpha()
 	#[(stand),(down),(run),(fight),(die),(jump)]
 	sequences = [(0,1,False),(1,3,False),(4,7,True),(10,4,True),(14,9,True),(23,6,False)]
 	def __init__(self):
 		pygame.sprite.Sprite.__init__(self)
-		self.image = Personnage.spriteSheet.subsurface(pygame.Rect(0,0,grid_w,grid_h))
+		self.image = Personnage.player.subsurface(pygame.Rect(0,0,grid_w,grid_h))
 		self.rect = pygame.Rect(0,0,grid_w,grid_h)
 		self.rect.bottom = HEIGHT
 		self.numeroSequence = 0
@@ -23,13 +23,13 @@ class Personnage(pygame.sprite.Sprite):
 		self.jump = 50	
 		self.bullet_x = 0
 		self.bullet_y = 0	
-
+	
 	def update(self,time):
 		self.deltaTime = self.deltaTime + time
 		if self.deltaTime>=150:
 			self.deltaTime = 0
 			n = Personnage.sequences[self.numeroSequence][0]+self.numeroImage
-			self.image = Personnage.spriteSheet.subsurface(pygame.Rect(n%10*grid_w,n//10*grid_h,grid_w,grid_h)) 
+			self.image = Personnage.player.subsurface(pygame.Rect(n%10*grid_w,n//10*grid_h,grid_w,grid_h)) 
 			if self.flip:
 				self.image = pygame.transform.flip(self.image,True,False)
 			
