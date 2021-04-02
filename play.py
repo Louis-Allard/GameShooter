@@ -48,6 +48,7 @@ def main():
 		elmts.elmnts(elmnts_x,elmnts_y,espace_elemnts)
 		#surface.blit(perso.image,perso.rect)    
 		perso_group.draw(surface)
+		perso_group.update()
 
 		elmnts_x -= elemts_vitesse
 		if elmnts_x < 20:
