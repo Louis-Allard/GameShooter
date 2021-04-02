@@ -12,9 +12,10 @@ def main():
 	perso = Personnage()
 	perso_group = pygame.sprite.Group()
 	perso_group.add(perso)
+	bullet_group = pygame.sprite.Group()
 	elmts = Elements()  	
 	clock = pygame.time.Clock()
-	time = clock.tick(500)
+	time = clock.tick()
 	elmnts_x = WIDTH
 	elmnts_y = randint(-20,610)
 	espace_elemnts = el04_h * randint(2,10)
@@ -35,6 +36,7 @@ def main():
 					perso.goJump(1)	
 				if event.key == pygame.K_SPACE:
 					print("SHOT")
+					bullet_group.add(perso.create_bullet())
 			if event.type == pygame.KEYUP:	
 				if event.key == pygame.K_UP:
 					perso.goJump(0)			
@@ -43,12 +45,14 @@ def main():
 				perso.setSequence(0)		
 		
 		perso.update(time)		
-		surface.blit(background,(0,0))
-		surface.blit(background,rect)
-		elmts.elmnts(elmnts_x,elmnts_y,espace_elemnts)
+		#surface.blit(background,(0,0))
+		#surface.blit(background,rect)
+		#elmts.elmnts(elmnts_x,elmnts_y,espace_elemnts)
 		#surface.blit(perso.image,perso.rect)    
 		perso_group.draw(surface)
-		perso_group.update()
+		perso_group.update(time)
+		bullet_group.draw(surface)
+		bullet_group.update()
 
 		elmnts_x -= elemts_vitesse
 		if elmnts_x < 20:

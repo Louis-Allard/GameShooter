@@ -1,4 +1,5 @@
 import pygame
+from e.Bullet import *
 from e.variables import *
 
 pygame.display.set_caption("GameShooter")
@@ -7,7 +8,6 @@ game_over = False
 
 class Personnage(pygame.sprite.Sprite):
 	player = pygame.image.load("./sprites/player.png").convert_alpha()
-	bullet = pygame.image.load("./sprites/bullet.png").convert_alpha()
 	#[(stand),(down),(run),(fight),(die),(jump)]
 	sequences = [(0,1,False),(1,3,False),(4,7,True),(10,4,True),(14,9,True),(23,6,False)]
 	def __init__(self):
@@ -21,8 +21,8 @@ class Personnage(pygame.sprite.Sprite):
 		self.deltaTime = 0
 		self.vitesse = 6
 		self.jump = 50	
-		self.bullet_x = 0
-		self.bullet_y = 0	
+		pos_x = self.rect[0]
+		pos_y = self.rect[1]
 	
 	def update(self,time):
 		self.deltaTime = self.deltaTime + time
@@ -40,7 +40,12 @@ class Personnage(pygame.sprite.Sprite):
 					self.numeroImage = 0
 				else:
 					self.numeroImage = self.numeroImage-1
-	
+
+	def create_bullet(self):
+		bullet_x = self.rect[0]
+		bullet_y = self.rect[1] + 100
+		return Bullet(bullet_x,bullet_y)
+
 	def setSequence(self,n):
 		if self.numeroSequence != n:
 			self.numeroImage = 0
@@ -78,3 +83,4 @@ class Personnage(pygame.sprite.Sprite):
 			self.setSequence(2)	
 			self.rect = self.rect.move(v,0).clamp(rectScreen)
 			self.flip = f
+			print("perso_x = " + str(self.rect[0]))
