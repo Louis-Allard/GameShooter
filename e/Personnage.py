@@ -42,7 +42,7 @@ class Personnage(pygame.sprite.Sprite):
 					self.numeroImage = self.numeroImage-1
 
 	def create_bullet(self):
-		bullet_x = self.rect[0]
+		bullet_x = self.rect[0] + 150
 		bullet_y = self.rect[1] + 100
 		return Bullet(bullet_x,bullet_y)
 
