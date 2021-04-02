@@ -10,13 +10,15 @@ pygame.init()
 def main():
 	game_over = False
 	perso = Personnage()
+	perso_group = pygame.sprite.Group()
+	perso_group.add(perso)
 	elmts = Elements()  	
 	clock = pygame.time.Clock()
 	time = clock.tick(500)
 	elmnts_x = WIDTH
 	elmnts_y = randint(-20,610)
 	espace_elemnts = el04_h * randint(2,10)
-	enable = 0
+	enable = 0 
 	bullet_x = 0	
 
 	while not game_over: 		
