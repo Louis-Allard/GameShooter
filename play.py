@@ -35,7 +35,6 @@ def main():
 				if event.key == pygame.K_UP:
 					perso.goJump(1)	
 				if event.key == pygame.K_SPACE:
-					print("SHOT")
 					bullet_group.add(perso.create_bullet())
 			if event.type == pygame.KEYUP:	
 				if event.key == pygame.K_UP:

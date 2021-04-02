@@ -64,7 +64,6 @@ class Personnage(pygame.sprite.Sprite):
 		self.setSequence(0)
 
 	def goDown(self):
-		print("goDown")
 		self.flip = False
 		self.setSequence(1)
 
@@ -83,4 +82,3 @@ class Personnage(pygame.sprite.Sprite):
 			self.setSequence(2)	
 			self.rect = self.rect.move(v,0).clamp(rectScreen)
 			self.flip = f
-			print("perso_x = " + str(self.rect[0]))
