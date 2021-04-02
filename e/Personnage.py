@@ -78,19 +78,3 @@ class Personnage(pygame.sprite.Sprite):
 			self.setSequence(2)	
 			self.rect = self.rect.move(v,0).clamp(rectScreen)
 			self.flip = f
-	'''
-	#inactif
-	def goBullet(self,bullet_x,bullet_y,pos_x,enable):
-		pos_x = self.rect[0]
-		bullet_x = pos_x + grid_w - 50
-		if enable == 1:
-			self.bullet.set_alpha(200)
-			while bullet_x < WIDTH:	
-				print("bullet_x::" + str(bullet_x))
-				bullet_x += bullet_vitesse	
-				surface.blit(self.bullet,(bullet_x,bullet_y))		
-		elif enable == 0:
-			self.bullet.set_alpha(0)	
-		else:
-			print("WARNING BULLET ALPHA")
-	'''		
