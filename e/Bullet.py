@@ -1,8 +1,11 @@
 import pygame
+import pickle
 from e.Personnage import *
 from e.variables import *
 
 pygame.display.set_caption("GameShooter")
+
+stateFile = "flipState"
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self,pos_x,pos_y):
@@ -12,4 +15,16 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center = (pos_x,pos_y))
 
     def update(self):
-        self.rect.x  += 5
+        if stateFile:
+            file = open(stateFile, "rb")
+            flip = pickle.load(file)
+            file.close()
+            f = flip[0]
+            if f:
+                self.rect.x += 5
+                print(f)
+            else:
+                self.rect.x -= 5
+                print(f)
+        else:
+            print("No flipState file")

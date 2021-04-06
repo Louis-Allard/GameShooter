@@ -1,4 +1,5 @@
 import pygame
+import pickle
 from e.Bullet import *
 from e.variables import *
 
@@ -80,3 +81,7 @@ class Personnage(pygame.sprite.Sprite):
 			self.setSequence(2)	
 			self.rect = self.rect.move(v,0).clamp(rectScreen)
 			self.flip = f
+			flip = [f]
+			file = open("flipState", "wb")
+			pickle.dump(flip, file)
+			file.close()
