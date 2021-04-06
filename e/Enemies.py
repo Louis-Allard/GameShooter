@@ -24,3 +24,6 @@ class Enemies(pygame.sprite.Sprite):
         self.rect.x -= enemie_vitesse
         if self.rect.x <= 0:
             self.rect.x = WIDTH - 50
+    
+    def epos(self,enemie_pos):
+        enemie_pos = self.rect.x
