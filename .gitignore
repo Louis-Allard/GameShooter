@@ -128,3 +128,5 @@ dmypy.json
 #sprites
 sprites/originals/
 sprites/xcf/
+
+flipState
