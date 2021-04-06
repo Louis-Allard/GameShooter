@@ -23,7 +23,8 @@ def main():
 	elmnts_x = WIDTH
 	elmnts_y = randint(-20,610)
 	espace_elemnts = el04_h * randint(2,10)
-	enemie0_x = WIDTH
+	enemie_x = WIDTH
+	enemie_y = 0
 	enable = 0 
 
 	while not game_over: 		
@@ -65,7 +66,7 @@ def main():
 			elmnts_x = WIDTH
 			elmnts_y = randint(-0,HEIGHT)
 	
-		enemie01_x -= enemie_vitesse
+		enemie_x -= enemie_vitesse
 
 		pygame.display.flip()
 main()
