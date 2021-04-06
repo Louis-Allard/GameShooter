@@ -23,5 +23,4 @@ class Enemies(pygame.sprite.Sprite):
     def update(self,time):
         self.rect.x -= enemie_vitesse
         if self.rect.x <= 0:
-            print(self.rect.x)
             self.rect.x = WIDTH - 50
