@@ -1,6 +1,5 @@
 import pygame
 
-WHITE = (255,255,255)
 WIDTH = 1020
 HEIGHT = 600
 grid_w = 195
