@@ -16,7 +16,7 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center = (pos_x,pos_y))
 
     def update(self,enemie_pos):
-        print("enemie position: " + str(Enemies.rect))
+        print("enemie position: " + str(Enemies.epos))
         if stateFile:
             file = open(stateFile, "rb")
             flip = pickle.load(file)
