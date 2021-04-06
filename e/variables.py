@@ -16,6 +16,7 @@ el04_h = 11
 enemie01_w = 50
 enemie01_h = 80
 elemts_vitesse = 10
+enemie_vitesse = 5
 pos_x = 0
 pos_y = 0
 
