@@ -2,6 +2,7 @@ import pygame
 import pickle
 from e.Personnage import *
 from e.variables import *
+from e.Enemies import *
 
 pygame.display.set_caption("GameShooter")
 
@@ -28,5 +29,7 @@ class Bullet(pygame.sprite.Sprite):
                 self.rect.x += 5
                 if self.rect.x >= WIDTH + 10:
                     self.kill()
+                if self.rect.x == Enemies.rect.x:
+                    print("KILL")
         else:
             print("No flipState file")
