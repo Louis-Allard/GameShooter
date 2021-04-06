@@ -3,6 +3,7 @@ import time
 from random import *
 from e.Personnage import Personnage
 from e.Elements import Elements
+from e.Enemies import Enemies
 from e.variables import *
 
 pygame.init()
@@ -13,6 +14,9 @@ def main():
 	perso_group = pygame.sprite.Group()
 	perso_group.add(perso)
 	bullet_group = pygame.sprite.Group()
+	enemies = Enemies()
+	enemies_group = pygame.sprite.Group()
+	enemies_group.add(enemies)
 	elmts = Elements()  	
 	clock = pygame.time.Clock()
 	time = clock.tick(5)
@@ -50,6 +54,8 @@ def main():
 		surface.blit(perso.image,perso.rect)    
 		perso_group.draw(surface)
 		perso_group.update(time)
+		enemies_group.draw(surface)
+		enemies_group.update(time)
 		bullet_group.draw(surface)
 		bullet_group.update()
 
