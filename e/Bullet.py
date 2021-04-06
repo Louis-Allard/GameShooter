@@ -29,7 +29,5 @@ class Bullet(pygame.sprite.Sprite):
                 self.rect.x += 5
                 if self.rect.x >= WIDTH + 10:
                     self.kill()
-                if self.rect.x == Enemies.rect.x:
-                    print("KILL")
         else:
             print("No flipState file")

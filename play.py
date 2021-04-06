@@ -19,7 +19,7 @@ def main():
 	enemies_group.add(enemies)
 	elmts = Elements()  	
 	clock = pygame.time.Clock()
-	time = clock.tick(5)
+	time = clock.tick(15)
 	elmnts_x = WIDTH
 	elmnts_y = randint(-20,610)
 	espace_elemnts = el04_h * randint(2,10)
