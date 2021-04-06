@@ -15,4 +15,4 @@ class Enemies(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = Enemies.enemie01.subsurface(pygame.Rect(0,0,enemie01_w,enemie01_h))
         self.rect = pygame.Rect(0,0,enemie01_w,enemie01_h)
-        self.rect.bottom = HEIGHT                
+        self.rect.bottom = HEIGHT + 10                
