@@ -21,10 +21,12 @@ class Bullet(pygame.sprite.Sprite):
             file.close()
             f = flip[0]
             if f:
-                self.rect.x += 5
-                print(f)
-            else:
                 self.rect.x -= 5
-                print(f)
+                if self.rect.x <= -10:
+                    self.kill()
+            else:
+                self.rect.x += 5
+                if self.rect.x >= WIDTH + 10:
+                    self.kill()
         else:
             print("No flipState file")
