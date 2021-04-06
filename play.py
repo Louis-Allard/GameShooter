@@ -10,14 +10,16 @@ pygame.init()
 def main():
 	game_over = False
 	perso = Personnage()
+	perso_group = pygame.sprite.Group()
+	perso_group.add(perso)
+	bullet_group = pygame.sprite.Group()
 	elmts = Elements()  	
 	clock = pygame.time.Clock()
-	time = clock.tick(500)
+	time = clock.tick(5)
 	elmnts_x = WIDTH
 	elmnts_y = randint(-20,610)
 	espace_elemnts = el04_h * randint(2,10)
-	enable = 0
-	bullet_x = 0	
+	enable = 0 
 
 	while not game_over: 		
 		for event in pygame.event.get():
@@ -33,8 +35,7 @@ def main():
 				if event.key == pygame.K_UP:
 					perso.goJump(1)	
 				if event.key == pygame.K_SPACE:
-					print("perso.goBullet(bullet_x,bullet_y,pos_x,1)")
-					#perso.goBullet(bullet_x,bullet_y,pos_x,1)
+					bullet_group.add(perso.create_bullet())
 			if event.type == pygame.KEYUP:	
 				if event.key == pygame.K_UP:
 					perso.goJump(0)			
@@ -47,16 +48,17 @@ def main():
 		surface.blit(background,rect)
 		elmts.elmnts(elmnts_x,elmnts_y,espace_elemnts)
 		surface.blit(perso.image,perso.rect)    
-		#surface.blit(perso.bullet,(perso.bullet_x,perso.bullet_y))		
-
-		#bullet_x += bullet_vitesse
+		perso_group.draw(surface)
+		perso_group.update(time)
+		bullet_group.draw(surface)
+		bullet_group.update()
 
 		elmnts_x -= elemts_vitesse
 		if elmnts_x < 20:
 			elmnts_x = WIDTH
 			elmnts_y = randint(-0,HEIGHT)
 	
-		pygame.display.update()
+		pygame.display.flip()
 main()
 pygame.quit()
 quit()

@@ -9,8 +9,9 @@ Run and kill with this game shooter
 ***
 
 
-Sprites documentation: 
+documentation: 
 https://sciences-du-numerique.fr/tuto-pygame/sprites.html
+https://artheodoc.wordpress.com/2019/07/24/sauvegarder-vos-variables-dans-un-fichier-avec-python/
 
 
 ***

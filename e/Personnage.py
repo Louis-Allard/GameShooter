@@ -1,4 +1,6 @@
 import pygame
+import pickle
+from e.Bullet import *
 from e.variables import *
 
 pygame.display.set_caption("GameShooter")
@@ -6,13 +8,12 @@ pygame.display.set_caption("GameShooter")
 game_over = False
 
 class Personnage(pygame.sprite.Sprite):
-	spriteSheet = pygame.image.load("./sprites/player.png").convert_alpha()
-	bullet = pygame.image.load("./sprites/bullet.png").convert_alpha()
+	player = pygame.image.load("./sprites/player.png").convert_alpha()
 	#[(stand),(down),(run),(fight),(die),(jump)]
 	sequences = [(0,1,False),(1,3,False),(4,7,True),(10,4,True),(14,9,True),(23,6,False)]
 	def __init__(self):
 		pygame.sprite.Sprite.__init__(self)
-		self.image = Personnage.spriteSheet.subsurface(pygame.Rect(0,0,grid_w,grid_h))
+		self.image = Personnage.player.subsurface(pygame.Rect(0,0,grid_w,grid_h))
 		self.rect = pygame.Rect(0,0,grid_w,grid_h)
 		self.rect.bottom = HEIGHT
 		self.numeroSequence = 0
@@ -21,15 +22,13 @@ class Personnage(pygame.sprite.Sprite):
 		self.deltaTime = 0
 		self.vitesse = 6
 		self.jump = 50	
-		self.bullet_x = 0
-		self.bullet_y = 0	
-
+	
 	def update(self,time):
 		self.deltaTime = self.deltaTime + time
 		if self.deltaTime>=150:
 			self.deltaTime = 0
 			n = Personnage.sequences[self.numeroSequence][0]+self.numeroImage
-			self.image = Personnage.spriteSheet.subsurface(pygame.Rect(n%10*grid_w,n//10*grid_h,grid_w,grid_h)) 
+			self.image = Personnage.player.subsurface(pygame.Rect(n%10*grid_w,n//10*grid_h,grid_w,grid_h)) 
 			if self.flip:
 				self.image = pygame.transform.flip(self.image,True,False)
 			
@@ -40,7 +39,12 @@ class Personnage(pygame.sprite.Sprite):
 					self.numeroImage = 0
 				else:
 					self.numeroImage = self.numeroImage-1
-	
+
+	def create_bullet(self):
+		bullet_x = self.rect[0] + 150
+		bullet_y = self.rect[1] + 100
+		return Bullet(bullet_x,bullet_y)
+
 	def setSequence(self,n):
 		if self.numeroSequence != n:
 			self.numeroImage = 0
@@ -59,7 +63,6 @@ class Personnage(pygame.sprite.Sprite):
 		self.setSequence(0)
 
 	def goDown(self):
-		print("goDown")
 		self.flip = False
 		self.setSequence(1)
 
@@ -78,19 +81,7 @@ class Personnage(pygame.sprite.Sprite):
 			self.setSequence(2)	
 			self.rect = self.rect.move(v,0).clamp(rectScreen)
 			self.flip = f
-	'''
-	#inactif
-	def goBullet(self,bullet_x,bullet_y,pos_x,enable):
-		pos_x = self.rect[0]
-		bullet_x = pos_x + grid_w - 50
-		if enable == 1:
-			self.bullet.set_alpha(200)
-			while bullet_x < WIDTH:	
-				print("bullet_x::" + str(bullet_x))
-				bullet_x += bullet_vitesse	
-				surface.blit(self.bullet,(bullet_x,bullet_y))		
-		elif enable == 0:
-			self.bullet.set_alpha(0)	
-		else:
-			print("WARNING BULLET ALPHA")
-	'''		
+			flip = [f]
+			file = open("flipState", "wb")
+			pickle.dump(flip, file)
+			file.close()
