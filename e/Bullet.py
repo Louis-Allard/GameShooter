@@ -15,8 +15,6 @@ class Bullet(pygame.sprite.Sprite):
         self.image = pygame.Surface((30,5))
         self.image.fill((255,0,0))
         self.rect = self.image.get_rect(center = (bullet_x,bullet_y))
-        self.rect = pygame.draw(surface,(255,0,0),4)
-
     def update(self,enemie_pos):
         if stateFile:
             file = open(stateFile, "rb")
@@ -26,16 +24,14 @@ class Bullet(pygame.sprite.Sprite):
             if f:
                 self.rect.x -= 5
                 if self.rect.x <= -10:
-                    if self.rect.colliderect(enemies.rect):
-                        pygame.draw.rect(surface,(255,0,0),enemies.rect,4)
-                        print("COLLID")    
-                    self.kill()
+                    if self.rect.colliderect(enemies.rect):  
+                        self.kill()  
             else:
                 self.rect.x += 5
-                if self.rect.x >= WIDTH + 10:
-                    if self.rect.colliderect(enemies.rect):
-                        pygame.draw.rect(surface,(255,0,0),enemies.rect,4)
-                        print("COLLID")       
+                if self.rect.x >= WIDTH + 10:       
                     self.kill()
-        else:
+            if self.rect.x == enemies.enemie_x:
+                print("KILL")
+                
+        else:    
             print("No flipState file")

@@ -22,7 +22,7 @@ class Personnage(pygame.sprite.Sprite):
 		self.deltaTime = 0
 		self.vitesse = 6
 		self.jump = 50	
-	
+			
 	def update(self,time):
 		self.deltaTime = self.deltaTime + time
 		if self.deltaTime>=150:
