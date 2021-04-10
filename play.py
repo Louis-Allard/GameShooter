@@ -59,7 +59,7 @@ def main():
 		enemies_group.draw(surface)
 		enemies_group.update(time)
 		bullet_group.draw(surface)
-		bullet_group.update(enemies.rect)
+		bullet_group.update(time)
 
 		elmnts_x -= elemts_vitesse
 		if elmnts_x < 20:
