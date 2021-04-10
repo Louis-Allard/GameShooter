@@ -1,5 +1,4 @@
 import pygame
-import pickle
 from e.variables import *
 
 '''
@@ -25,11 +24,4 @@ class Enemies(pygame.sprite.Sprite):
         self.rect.x -= enemie_vitesse
         if self.rect.x <= 0:
             self.rect.x = WIDTH - 50
-        bullet_pos = self.rect.x
-        flip[1] = [bullet_pos]
-        file = open("flipState", "wb")       
-        pickle.dump(flip[1],file)
-        file.close()
-    
-    def epos(self,enemie_pos):
-        enemie_pos = self.rect.x
+            enemie_pos = self.rect.x

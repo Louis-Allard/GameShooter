@@ -4,6 +4,7 @@ from random import *
 from e.Personnage import Personnage
 from e.Elements import Elements
 from e.Enemies import Enemies
+from e.Bullet import Bullet
 from e.variables import *
 
 pygame.init()
@@ -13,6 +14,7 @@ def main():
 	perso = Personnage()
 	perso_group = pygame.sprite.Group()
 	perso_group.add(perso)
+	bullet = Bullet(pos_x,pos_y)
 	bullet_group = pygame.sprite.Group()
 	enemies = Enemies()
 	enemies_group = pygame.sprite.Group()
