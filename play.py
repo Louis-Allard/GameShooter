@@ -14,7 +14,7 @@ def main():
 	perso = Personnage()
 	perso_group = pygame.sprite.Group()
 	perso_group.add(perso)
-	bullet = Bullet(pos_x,pos_y)
+	bullet = Bullet(bullet_x,bullet_y)
 	bullet_group = pygame.sprite.Group()
 	enemies = Enemies()
 	enemies_group = pygame.sprite.Group()

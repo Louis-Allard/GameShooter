@@ -10,11 +10,11 @@ enemies = Enemies()
 stateFile = "flipState"
 
 class Bullet(pygame.sprite.Sprite):
-    def __init__(self,pos_x,pos_y):
+    def __init__(self,bullet_x,bullet_y):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.Surface((30,5))
         self.image.fill((255,0,0))
-        self.rect = self.image.get_rect(center = (pos_x,pos_y))
+        self.rect = self.image.get_rect(center = (bullet_x,bullet_y))
 
     def update(self,enemie_pos):
         if stateFile:
