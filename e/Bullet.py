@@ -22,6 +22,7 @@ class Bullet(pygame.sprite.Sprite):
             flip = pickle.load(file)
             file.close()
             f = flip[0]
+            print(flip)
             if f:
                 self.rect.x -= 5
                 if self.rect.x <= -10:
