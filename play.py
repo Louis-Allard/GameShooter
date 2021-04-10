@@ -3,6 +3,8 @@ import time
 from random import *
 from e.Personnage import Personnage
 from e.Elements import Elements
+from e.Enemies import Enemies
+from e.Bullet import Bullet
 from e.variables import *
 
 pygame.init()
@@ -12,10 +14,14 @@ def main():
 	perso = Personnage()
 	perso_group = pygame.sprite.Group()
 	perso_group.add(perso)
+	bullet = Bullet(pos_x,pos_y)
 	bullet_group = pygame.sprite.Group()
+	enemies = Enemies()
+	enemies_group = pygame.sprite.Group()
+	enemies_group.add(enemies)
 	elmts = Elements()  	
 	clock = pygame.time.Clock()
-	time = clock.tick(5)
+	time = clock.tick(15)
 	elmnts_x = WIDTH
 	elmnts_y = randint(-20,610)
 	espace_elemnts = el04_h * randint(2,10)
@@ -50,8 +56,10 @@ def main():
 		surface.blit(perso.image,perso.rect)    
 		perso_group.draw(surface)
 		perso_group.update(time)
+		enemies_group.draw(surface)
+		enemies_group.update(time)
 		bullet_group.draw(surface)
-		bullet_group.update()
+		bullet_group.update(enemies.rect)
 
 		elmnts_x -= elemts_vitesse
 		if elmnts_x < 20:
