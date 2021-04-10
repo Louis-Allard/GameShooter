@@ -15,6 +15,7 @@ class Bullet(pygame.sprite.Sprite):
         self.image = pygame.Surface((30,5))
         self.image.fill((255,0,0))
         self.rect = self.image.get_rect(center = (bullet_x,bullet_y))
+        self.rect = pygame.draw(surface,(255,0,0),4)
 
     def update(self,enemie_pos):
         if stateFile:
